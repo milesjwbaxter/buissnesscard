@@ -80,6 +80,7 @@
       display: inline-block;
       margin-top: 1rem;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .button:hover {
@@ -145,9 +146,8 @@
       <h1>(385)-239-4385</h1>
       Bonus! Here's my Instagram if you want to stalk me first!
       <br>
-      <a class="button" href="https://www.instagram.com/miles__baxter/#" target="_blank">Light reconnaissance</a><br>
+      <a class="button" href="https://www.instagram.com/miles__baxter/#">Light reconnaissance</a><br>
     </section>
-
 
     <section>
       <h2>FAQ (Sort of)</h2>
@@ -160,11 +160,12 @@
     </section>
 
   </main>
+
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <script>
   const instaButton = document.querySelector('.button[href*="instagram"]');
   instaButton.addEventListener('click', (e) => {
-    e.preventDefault(); // Stop immediate navigation
+    e.preventDefault(); // stop immediate navigation
 
     // Launch confetti
     confetti({
@@ -173,14 +174,12 @@
       origin: { y: 0.6 }
     });
 
-    // Open Instagram after a short delay (e.g., 1 second)
+    // Keep confetti visible a little longer and then open the link
     setTimeout(() => {
       window.open(instaButton.href, '_blank');
-    }, 1000);
+    }, 500); // 0.5 second delay
   });
 </script>
 
 </body>
 </html>
-
-
