@@ -164,15 +164,23 @@
 <script>
   const instaButton = document.querySelector('.button[href*="instagram"]');
   instaButton.addEventListener('click', (e) => {
+    e.preventDefault(); // Stop immediate navigation
+
     // Launch confetti
     confetti({
       particleCount: 150,
       spread: 80,
       origin: { y: 0.6 }
     });
+
+    // Open Instagram after a short delay (e.g., 1 second)
+    setTimeout(() => {
+      window.open(instaButton.href, '_blank');
+    }, 1000);
   });
 </script>
 
 </body>
 </html>
+
 
