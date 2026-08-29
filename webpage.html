@@ -3,247 +3,391 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summer Adventure Group</title>
+    <title>Community Events & Entertainment</title>
     <style>
-        /* Global Styles */
+        :root {
+            --bg-dark: #07090e;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-hover-border: rgba(168, 85, 247, 0.4);
+            --accent-primary: #8b5cf6;
+            --accent-gradient: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #ec4899 100%);
+            --accent-glow: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4));
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #121212;
-            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px 20px;
             line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .ambient-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-sphere-1 {
+            position: absolute;
+            top: -10%;
+            left: 20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(80px);
+        }
+
+        .glow-sphere-2 {
+            position: absolute;
+            bottom: -10%;
+            right: 15%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(100px);
         }
 
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
         }
 
-        /* Hero Section */
         header {
             text-align: center;
-            padding: 80px 20px;
-            /* Header background now uses your actual 1.jpg */
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(18, 18, 18, 1)), url('https://lh3.googleusercontent.com/rd-d/ALs6j_FHpnDyAUnN21UpYAj3mq-laWmUtpXHz6CWj5tFleDYWtZrRohThMnoLdYdV6bxy5jPF52rg2gGFxRWY9mtp5tAuG4X9r2Po5mm7fuhiu6Jnsp-ihr1MDyUqW5-RzlFozZJhe-w5Qy27JfKvsUF-pq0JUx78gPE5z1jcO8R6g_SNwc0IYTtu1Is8rrqYH3PYjGS785tOyuAnDhaJ29ygmxRAmWowMXAtopn1UGWVEIECzZSEk64PutvMn7kPukpoJq12Ogce1tAPD7lyM0zuN9yKEALDKe6xmh0keZYjpc0FVFK1Nci8Cw7twkBQwHe3OFdHr2KKGL74sMIR37wWclRQMxr_GMyIh8W_ORKnZcsKsoWw07FBhAMgd8VXDsFFtxXDpAIx-MAE1B6NPBmA-QMHkj_bx76cczQIokKENrOTdHZEhvN-xqEGojtjIcvnPfxZCpNjBTO7g48i2ECS3UwBjBRSPn1XnkdcVp4B2-QYiibjJPJuyqjAh6J2L5997Ax6xDK_W07U7UKi_jrfGKealLmxfAWs72DSMSqYh74qalPm23Pkl4xeGRgJcjlCa-kqPRO3zFGJhbP_QMmgJkR8wU6ohn7yRwo2zJ_IMaR-lMXFdgRHa7AIewHWbQG1Wy5q9Wwd_XMvs6TJk7RDWY5ut6uQHk2N8ynPcRMGDZ5aTG9YhLh3xnkyxdAbonemUJiPEOzvCcSSWyG9ZY0pT8ItMOmsbXi4VB7Rvgp-cJVojEzbiP-PrNwGhV4ERaYQ0m12tZFx87-KRgNmGuxKOBPQTy5iUuNpowaSOSaatWlZ1NNNRGMgwDew4N4v9nPgOVdGsVqsKMcKXAEAXlJHIJfbPAhwiDGrPl3V-MI9A1u3UULZk_pWxNoq_XrZndUv1iKw0HUJtiC3Y9Kr7hptNKRsTa-RSeq_v5TC297msa1DPaMZJleTGTynB3pDDnwvnnI-Zd545zkxDA57ir_T6u-VenhLphqBXO1BuPSQ6cy19Ivl-qlfVSmMkxVJSHF9bLamQI8HwNelJqc10oTCApzef90MdrGAxddEAv45sXzC5rRlG1-wTDKmls_WyyzmzciSdlK-5IYj0VRd-sAZax21eC6SA=w962-h861?auditContext=prefetch') no-repeat center center/cover;
-            border-bottom: 1px solid #222;
-        }
-
-        header h1 {
-            font-size: 3rem;
-            color: #ff9800;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            color: #b0b0b0;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* About Section */
-        .about {
-            padding: 60px 20px;
-            text-align: center;
-            background-color: #1a1a1a;
-            border-radius: 8px;
             margin-bottom: 40px;
         }
 
-        .about h2 {
-            color: #fff;
-            margin-bottom: 20px;
-            font-size: 2rem;
+        .hero-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            margin-bottom: 35px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
         }
 
-        .about p {
-            font-size: 1.1rem;
-            max-width: 750px;
-            margin: 0 auto 20px auto;
-            color: #cccccc;
+        .hero-banner {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.9);
         }
 
-        /* Adventure Grid */
-        .grid-title {
-            font-size: 2rem;
-            color: #fff;
-            margin-bottom: 30px;
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(7, 9, 14, 0) 0%, rgba(7, 9, 14, 0.8) 75%, var(--bg-dark) 100%);
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 620px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Top Sign-Up Section */
+        .signup-section {
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 40px 30px;
+            margin-bottom: 50px;
             text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
         }
 
-        .adventure-grid {
+        .signup-section h2 {
+            font-size: 2.1rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .signup-section p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-gradient);
+            color: #ffffff;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.5);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -5px rgba(236, 72, 153, 0.6);
+            filter: brightness(1.1);
+        }
+
+        /* Schedule Grid Layout */
+        .schedule-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 28px;
             margin-bottom: 60px;
         }
 
-        .card {
-            background-color: #1a1a1a;
-            border-radius: 8px;
+        .event-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
+        .event-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--card-hover-border);
+            box-shadow: 0 20px 30px -10px rgba(139, 92, 246, 0.25);
         }
 
-        .card img {
+        .image-wrapper {
+            position: relative;
             width: 100%;
             height: 200px;
+            overflow: hidden;
+        }
+
+        .event-card img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            filter: brightness(0.8);
+            transition: transform 0.6s ease;
         }
 
-        .card-content {
-            padding: 20px;
+        .event-card:hover img {
+            transform: scale(1.06);
         }
 
-        .card-content h3 {
-            color: #ff9800;
-            margin-bottom: 10px;
-            font-size: 1.4rem;
+        .event-content {
+            padding: 26px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        .card-content p {
-            font-size: 0.95rem;
-            color: #aaa;
-        }
-
-        /* Call To Action (Contact) */
-        .cta {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #ff9800, #e65100);
-            color: #fff;
-            border-radius: 8px;
-            margin-bottom: 40px;
-        }
-
-        .cta h2 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            font-weight: 500;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            background-color: #fff;
-            color: #e65100;
-            padding: 15px 40px;
+        .badge {
+            align-self: flex-start;
+            padding: 6px 14px;
             border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            background: rgba(139, 92, 246, 0.12);
+            color: #a78bfa;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 14px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
-        .cta-btn:hover {
-            background-color: #f0f0f0;
-            transform: scale(1.05);
+        .event-card h4 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
         }
 
-        /* Footer */
+        .event-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
         footer {
             text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 0.9rem;
+            padding-top: 40px;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            header h1 { font-size: 2.2rem; }
-            .cta h2 { font-size: 1.8rem; }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 1.05rem;
+            margin-bottom: 24px;
+        }
+
+        .contact-info strong {
+            color: var(--text-main);
+        }
+
+        footer a {
+            color: #a78bfa;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: #ec4899;
+            text-decoration: underline;
+        }
+
+        .dropbox-note {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(236, 72, 153, 0.08));
+            border: 1px dashed rgba(168, 85, 247, 0.35);
+            padding: 18px 28px;
+            border-radius: 16px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .dropbox-note p {
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Adventures Wanted</h1>
-        <p>Life is for the taking</p>
-    </header>
+    <div class="ambient-glow">
+        <div class="glow-sphere-1"></div>
+        <div class="glow-sphere-2"></div>
+    </div>
 
     <div class="container">
+        <header>
+            <div class="hero-card">
+                <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_FHpnDyAUnN21UpYAj3mq-laWmUtpXHz6CWj5tFleDYWtZrRohThMnoLdYdV6bxy5jPF52rg2gGFxRWY9mtp5tAuG4X9r2Po5mm7fuhiu6Jnsp-ihr1MDyUqW5-RzlFozZJhe-w5Qy27JfKvsUF-pq0JUx78gPE5z1jcO8R6g_SNwc0IYTtu1Is8rrqYH3PYjGS785tOyuAnDhaJ29ygmxRAmWowMXAtopn1UGWVEIECzZSEk64PutvMn7kPukpoJq12Ogce1tAPD7lyM0zuN9yKEALDKe6xmh0keZYjpc0FVFK1Nci8Cw7twkBQwHe3OFdHr2KKGL74sMIR37wWclRQMxr_GMyIh8W_ORKnZcsKsoWw07FBhAMgd8VXDsFFtxXDpAIx-MAE1B6NPBmA-QMHkj_bx76cczQIokKENrOTdHZEhvN-xqEGojtjIcvnPfxZCpNjBTO7g48i2ECS3UwBjBRSPn1XnkdcVp4B2-QYiibjJPJuyqjAh6J2L5997Ax6xDK_W07U7UKi_jrfGKealLmxfAWs72DSMSqYh74qalPm23Pkl4xeGRgJcjlCa-kqPRO3zFGJhbP_QMmgJkR8wU6ohn7yRwo2zJ_IMaR-lMXFdgRHa7AIewHWbQG1Wy5q9Wwd_XMvs6TJk7RDWY5ut6uQHk2N8ynPcRMGDZ5aTG9YhLh3xnkyxdAbonemUJiPEOzvCcSSWyG9ZY0pT8ItMOmsbXi4VB7Rvgp-cJVojEzbiP-PrNwGhV4ERaYQ0m12tZFx87-KRgNmGuxKOBPQTy5iUuNpowaSOSaatWlZ1NNNRGMgwDew4N4v9nPgOVdGsVqsKMcKXAEAXlJHIJfbPAhwiDGrPl3V-MI9A1u3UULZk_pWxNoq_XrZndUv1iKw0HUJtiC3Y9Kr7hptNKRsTa-RSeq_v5TC297msa1DPaMZJleTGTynB3pDDnwvnnI-Zd545zkxDA57ir_T6u-VenhLphqBXO1BuPSQ6cy19Ivl-qlfVSmMkxVJSHF9bLamQI8HwNelJqc10oTCApzef90MdrGAxddEAv45sXzC5rRlG1-wTDKmls_WyyzmzciSdlK-5IYj0VRd-sAZax21eC6SA=w962-h861?auditContext=prefetch" alt="Event Header Banner" class="hero-banner">
+                <div class="hero-overlay"></div>
+            </div>
+            <h1>Monthly Event Schedule</h1>
+            <p class="subtitle">Join us for community gatherings, live concerts, volunteer projects, and game nights!</p>
+        </header>
 
-        <section class="about">
-            <h2>Life is for the taking!</h2>
-            <p></p>
-            <p>I <strong>firmly</strong> believe that life is what you make it, so I make it crazy and fun! I am always looking for a good adventure, and want to drag anyone along who wants to go. So, I try to always plan things to keep it interesting.</p>
-        </section>
-
-        <h2 class="grid-title">What We Do</h2>
-        <section class="adventure-grid">
-
-            <div class="card">
-                <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_HX-y1QR7KQc_rczn1hIrU-LrGAZJx8UQ6K20cqZI3IXfzZxS5lKawxJYzGjhQpw1H2f4-ptrbz5hetcUpEgSlWtPxc2Th8iVlCg4rlparbITH20qowUclErdcZlsBw0rq5tW0YbNPLqS2dBKqymn56k8LPmkg33HYawTorFkt6zuQ534yczDrhWi5v78KlZ-QK6PiQ6YDk78lMKFY0-0_Hk7vcor3MTfKwCtTaTOZvv6UAcP4dO0Aj60N6SzyDu3Ba_02K0qKQTbrskYvRvx2AoLCybFYn12RP_bpiUIMyCUE-CbOnnRsvnxT_iG6UUYKb5Edi1jWudAt7fhbxuxjWbGC7QY7vRg5XdFLBOABz_KVEp01PNQCn-7vPmR1oZS25r5Snitxmy9H84tI3g-Uw5preMUSzgrlgJkHR6H7FGmYgnuQ4NubAa_71ASpPoWHeF7epE-Gcvekvhw87yKE-4NDle7X9YNXBWj3ZZ3kwhXyKh5PTeGc6oIHBZpjqMzF06TkpH2XE9B9O7cTCNovj97LmoD_bO62PIyuv23GZhgoZe1nFZgUmXdUWF5ngtTRhlke-Dydng98i0QQmTLPeo6rRiffbiCGBWmy2TJ7vubWOVIMQDwLAUv_u3Lcva5tdZZfTgVD2v4TslkGTmOZpoEecxsd65JZWLCYS8R5SNxjpo15rWDmfSQelv48C9oSXYqpQQH2JkxVNh_DxJojjIf2MObScZJqKdCO3trShji8VuJq9ai1--AwZ3YsRJIB1KapfGW4GmanFkOu6ewkZuDIJPMLWLOMqjJT1ApFyhw8tHk3gBxsPEs6EfY1WLxvAJUqtUpZZSl9Pe89iLR5eb6c71Yk79QdV2LoixOn0qVV5lGpDog_RQb9erKfttskkjiI_0LAzGNbCwRi06ivl6X4JeV3LbjPmPOr2Wi1RitJcFdrZCb6BquT3iBY-Zxqzvn0B3MZiyyLjtWcxfE_Hsacrj-sxWiVRVGWJa0kozht0DyMBIASDdtLYzy6HYK58ITRUrgoUc7J45qXo38W6VdbAe0IEZg-lbR6tWtGShTrb5gxd7DoSZNI_21U0au5FTkCE7WBm_C98eb1S41ePCToMTw=w962-h861?auditContext=prefetch" alt="Game Night">
-                <div class="card-content">
-                    <h3>Game Night</h3>
-                    <p>Every other Sunday we do game nights with card games, board games, and Super Smash Bros!</p>
+        <main>
+            <div class="signup-section">
+                <h2>Concert night sign ups</h2>
+                <p>Want to perform on stage? Pick your category below to sign up:</p>
+                
+                <div class="btn-group">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdssuqZgjSETVhLYLQyCj33wBBLv0jfe3eVmEmHhtOBNrLSqw/viewform?usp=header" target="_blank" class="btn">Band Sign-Up</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjAoS9IpgHwi3PbAaOkYsmTGjLXxiPIutP_e9neKQ8Vx2WVg/viewform?usp=header" target="_blank" class="btn">Open Mic Sign-Up</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeK6yrx_OE6NegcpLhy3yEwGwyVuKnTMOfadCygssYl3mc_xQ/viewform?usp=publish-editor" target="_blank" class="btn">Karaoke Sign-Up</a>
                 </div>
             </div>
 
-            <div class="card">
-                <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_G9uGzuWLCzosB6L2oO_gEIJUtf7vVsEv7YyCFUUH7kJO2sWu8RZ_Z0KM_oKDTUxJ_VDPBEzfDggXnTJ-gBs3Ktlm6nvc8ZDbbkpfyG9nPYRS1A2T_PoSMZH6jAXP92p8uAW4owHV_Lq3Fu903xwKVouOp8yR4yxcD39XRLCm-YMH7oCey3pPG286rErVjcumIgbJ5fDHzunJjga7xuYyCh6eMDO9ZgktsvrWJb57A859-xk3JISOtHZ9YkClsfz1OhXIMjln6RxSisVvg-EFOwwlbofOhjaOH95vdR3_YssZOBIX7LADSXQSAIJMzGTpE0meylbVPYj-_cjg31opYy2K0gek3jTzJrU5QiuXtgrEPeU7cmEQpl8OK7ei8EOPN8Csej6dQH28qtIibpqmGL2nSAwQmbP3AyNgsyYMCUxA93BI5jiB8sBX1qcaseGo2DMBLPDpE3Hr32VIh3es9uW5tK_bqAdIM8pGPL8RUV_-cDFGlu1NHQus8MKsJtt3B5ItGrfwKGm-LK9ldZS6SODmw_sheQirlotZaJeuY3ZC9L9TPeVD2OwgcMlqBrScqvftYpYsejXlnW32pbkdGy0dVrS7JNS6Vo3NbwY8r8tv1iuOODC_z3KTEsBlgUh-NhvlMChZmoBmgF-iG5EtAEfP13KZEoLc_41hHEwnQ-K2EIJx3fEP9HGwwhX4MS03oJ0aRb0oQLFMOd6mYBM4z_enx4FQIrESVYaF9KgXLTseJ1hLX00ET0J3sshai4PUDL1HnuOsGKQq2jFSUf3k7f1RgwU0Bpu_h8kKOs_MAm1QEKoiBCs7WvcF9kmODc4bwDAMRUZrDD9yu_qc4CfjSfL_WMDFqoM2yWblkOrO75qfSMscMRLlvS3gUVMxp9SmxFOAiT06f_3rRl8SCD7YTfBk8fJDjUxDgwyElCiRGJgp8oH6EZG6B3kszmpvl8nfVuloO1Cat9kub7jIc5Ub8RRQDQiKl8NQ8jHaxd4Uk5QgScGCZ833z0V2HJn-N9w0gf0cZYpE3VCq8RXmS97SkhcFXrKuUlMXaFl5F_DWdCFOlF9bsqGAtv6pnFLNSAa4MivGf5CxnVuaXj5851MYQZDrw8mfw=w962-h861?auditContext=prefetch" alt="Friday Adventures">
-                <div class="card-content">
-                    <h3>Friday Adventures</h3>
-                    <p>Almost every Friday we plan a group activity! Usually we do something that everyone can enjoy.</p>
+            <div class="schedule-grid">
+                
+                <div class="event-card">
+                    <div class="image-wrapper">
+                        <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_F5PSUyWFeN5nAAV7RH4jafdJtBo4h1WCGQRUl_imrwS5OV2t1qOXbC1PMBT2b26HUXJSmCphlNNxVKKzL2mygPee7oZ94tphMNW2ZeleqjLnlTPFSg_Vz7YY6Ex_8VLr5kHIghMa-KqmiRIe7Gh7WFeaFN7W4N15LQvH02boNLbe3jl8dRrGpqNmo5x_dMPvlh-5vXNilAn4IDnvSgHW70EI1iuxJk0DxDx3adf_1FBlLB8hUGQLoAYkw7lwKHdmkshBtaDqmkgQC8dc_Qeb6Pl7pj83thAzNfF8aKejZZkFlbR7P1py7tMLVZmMKVo0PJmI8PSysbqar769lNvX-nRUVPRDfU37oLK-CB6w6XS3NPhXkCQvhdadY7AC8ATE_5ZCMnNAOcXQYROczj3zQkAoPisZeoqO-HZxIg8xqIYrdydhWNR8_FB9_H5QsxY7VA3Q1JKHktLL2Ife0ZZ6inOxOHuJAHD35VEnJUeVmW2Kr0P04tRkkVxis7MWqkf0Wenqriitxcw5nSzIwGTKp66x60a58cu0z4o7aN28CI--24_5lxN49KAd-j82sU-T-OBEEUFSxmFWwTwVgW_-dFyvNI0uI-1QIRQlmQXUtWC4MTQUaNPVF9s6E36W1JhhIR_2hh-jnv_mzpHrNix7qG5B1V22sg--6DMWmJFAg5KD2S4gHD7spx7ylu_EpGCv16LpGdqzlMW6YIuBqWzcngPuIAbu0xFv6SyM4UWdgAYcrmS82kX06BQOdZL6_eT5WcRF6zLCVV9_y5aqe1MhuXCnH4hZgq8I7l7yQEYc4REzpVdsS5-GRT6fSh38DathJct4OZV9GjV6LbwnwHVxDwU9ZGzFIti13Y-Lht1xeSsc1z33Se9WB5uKHyk1eV5PTHPuysgHVTulvPxMrYnitGHd47PIiYtYs7Cauhu8x7AhAI-ljRpiTKCS4A2w7SU25Lmyqju2ZBLzjb8cgmd7uwbpH8Koo3SRidw36ZkOqMyo3kPl8snYUKB_rs5rJP4H_Ee2eEI2oJIBX9F8sEybwve9GfUJEaUSYqfE6RawpGa8dTtnJEFLT2HeuGnUjjwvQ8SHibS-uTutrkjVA0TSyxSkIbgOa2ssBRTwpVfpfp2jmkvuiM2J4PNng_WyUCAJfsCaal3Sxx1w=w1183-h868?auditContext=prefetch">
+                    </div>
+                    <div class="event-content">
+                        <span class="badge">1st Friday</span>
+                        <h4>Monthly Party</h4>
+                        <p>Kick off the month with our main community social gathering.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card">
-                <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_Hkd87ZhELiZxOt8v0bl3uVooSrQ2lJPkYsx2mwF7BpzVEk70Kh1DIjsOVzL86obHk93KXslX4mbyuR_V--B6pbnG5UvnouL8oMjK7YsAWPnFZXoeLJd_r-1kNpbX8SqhlU8T3SEHVvNhW8VNt2l8RTnKdHudGzZxQtN0CRdImXKbiv73FuoozU2f-6Aft5IxegHOdL-glhkUvmucOw-B0zHprYzycd9SsisQGU3QC5ZVIn29o68XAeC7GcUd9dIzuo-wJjLVSkotbH0d9O6k1peH9K3QvDcvmqXjsSL489_1_EcQdX0EbuPY3FDBAXQNyUp7BUfZ4U-P83mpH7Rf4YSogYDvrE0_jWsGDORtRx8D0LAvzscDbcbRhaQMEhnEPG05fozqyC2F9c5ZYtbbt9P_nzhixkzSooRySCsiYOY6OO2udp2nvaeFt8Dtz7_gTkPGeBYUoV3xfvkBw-JdpOivc8PLVMmTZ_cxIVVpb83n0zasazCVtSNgBxqRay9WuVtGwIvZIlPJZzFeAZn1OBkJbVqnBZA_lCCctYp-U1Gr37DSkFgyzWZKumVzEcKgBmA4zwEKy-hmyrjOQtY5nL0TJLlvp8gukJUU2KrR7bwq04sKDZCXEXEeUVxE6-AXWcXv219sdcPM-DmNw8nVR_ud4VC2fYZnwe96sHG0gMUGVgCRUX-UNTf7cSi7cX1jL4GqtDBDsPh7aJKUPzP-ByJtP7dm1TRaiqBqIGpLMTHdTRAUSBulKgWmZ6xnzb8dy3M6Ohntg2fuvn84f6cWXwnWfw9DB1sF0qk6Wtl2Hj5TEQpZKVHFl4_pDxTwcJlrU2akOBwWpNrXEw8_ctjWKnCOKlNnkvzfxjxfcQxCjlXcw3LWYaNtG4Ox9m_t6AWGNjkwtaPlXwwugO0iOgZEZLxxVwFb92RYTX4B2Yla0vhobweAdJPmpfW8ia-wRSG5KKo1mFgg3bI4VZnonG8vjEH0llh7FZgQgTmVmSHaom_OjaCTWTb9hgTumeAo4LXFluT7BEErhuu2fXSLGFDQyT3MpoESm-Y26iDCy_NcbtgkfTclcepn6VN__EayX6MJsSQ0Nw1x3hOXu2PyfbAW3ZaHedPyE=w962-h843?auditContext=prefetch" alt="Movie Nights">
-                <div class="card-content">
-                    <h3>Movie Nights</h3>
-                    <p>On the last Friday of every month, we do a movie night! We usually watch a movie series per semester.</p>
+                <div class="event-card">
+                    <div class="image-wrapper">
+                        <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_FOpRVgzcoTjRosr0173R2RZpTbg08dD-CfBej-Z7SSN2o5raZAq8sSJpzI7pIh6f1BHgpUN5b91CneKcUQPaF9PPN3XkS4d5uJ7UXLQq-kl1GMnF7XIYXZWi42-s4mpOMTcK-hRqtBbOvCHCTX-4hS4Q_W5NIiwZ9d6zIW-Ix4yaa5yGqa5Wmat87li-n1EPanazJRrsSgPL0dLTSb683UQwiKxgqIACITgQfc28BgCmd9PEx2re8jHPvsKG4J5-B7Jc1gK3su_-BAogNnlbbf2rffeWt2lCYvxmtVQS12mauf-5AKNhhGIog5sYTbvvTpm1mY4R7qnEnAS589wjRqVpYV_3q6NmBKHS8on2gSucqWoDHxnRvYRzlaho8xZ9UOdfwGV9dH9uu0WyZDmiRjFByDJv2_matrzSMHc03jIXeO6Otc5y_leTwcxvXYJUudaim9PwUMc0H8FS2-Zw3G2jw7LYy0Ve0Oq_iTlKeMMutEtDO3Yhg_jkHmFSmgadPWYBMonqthaATzEao8aQOCqfFxyaCUXqQoCVkCDhlbZft4xIxzgtLHngQmdZljB0lLI3I8eKQ3O2EjN0MSoU11nqAzHrcU4ix3pRBoRY_ffE2WLGKjK-VxsoHFNt9bA7HfPg3p-2R4-UbParUJTwyiWuFBG16FmzRhJ7xvrqBITxYEpLGIMfAH2LQCUCpLlipn_-MngAZKbAuq8A0w9rWspUkNj-JDCnZNnUBABIPGOuRDGl9TXhZ2LiV0JgQK2MEk-2JTqJgO-AAncAyh2PT_XZDcHgEfDrX3AZz5jF2Cdi2NpAY5ncmHUmAA3e8wWcmZ4nwHR2OsKmIBvvPl0-bOeA75G5oJo3cTVfbmqsO1HJ1I_ofp1-zOgNO0aqGSp02rirOSLjsCNxZQeQOeNdIcFz8iWy3JNR76Wq2kPIxl-99Lo4dkUI2eJ2P3Q2-2oUqbV_q8HvAdLxNUVdfYGkTGXnffjfkr9ikUb01fAWlwZeFEE547CUHi2-Ih0OLuZbpMgGuH8pCP9cA8me_j92qqxt47Ge-NmjbEE3-FNaylJPLNcY5dI2AI0E5TRbTp9-q5gLihfa54JZ_Gm3rdF58f63dS9iG7xSsO2hcS1S_tHF13G-ZuWPaiwXVxT4C1e3Px7JuYRrsjjg=w1183-h868?auditContext=prefetch">
+                    </div>
+                    <div class="event-content">
+                        <span class="badge">2nd Friday</span>
+                        <h4>Concert Nights</h4>
+                        <p>Live band performances, open mic slots, and karaoke sessions.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card">
-                <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_Fiws5xBHzjdpLqXcw4TuSxZxfz0Viek3zbZwtOF--_NO1NkLqR0TVeFV-nhCdu3eW3qiC_Dp4RhA8eqcE1V5wA4E1HCkdoBghyWYRrNiYzkDMPvLB-mq5Rnov3hVhqf0AbI3qPG7mk77yQnU3CTyiLeAv3zanVF_47Lb487hkICwjkw7Xy3pihUjQ1k6jH0lEggt20tHkn6tCT-qVhw6d6yor2wrsMeEs7H4vaS_SI08APN2neyc2vG3tYm7sJP5yfSZ5585XwHnWQ2PQihIW8_x66ZMtKwbvTQdBTMDf1vl8lmUJk8CDDTTtf2j08VIdik3CUXN1lHj8gmnl9GcLa368n9DooD8cJHSiucB0E5t4lNIdjg0lsCgsgNdTbRCAwrVNVSLCk2c8FSpovTTWQ_RBPguPYWWG1LJgDaJCqnhdVonhMuCzdQCKeM-j75Xdl-iZf4qJ1kPiFdMKohC0cm2UqQ1JlUb8-8FtgYKQa1LtA16QRhUZev-YBcliP_HBD_IJ5RGuG6WTyAJTi1JyGBcmfnkd4gfBLTvHIAPQ6wfxKlXp4HTrNAEUdqai5-fEEcr9Ap4IJkVCafnWdu6ZxSt86s3kru6KEITr7RdZi7t3VPbVJGPajFf-RT3QVGYachdp8ogIl-KnQ7ONvPUCqURgLq0YIO8SvTZIU_OGbAzUR_QxYB40kmvtSjvQk3fjo7HksUJXrRJiIXdt79ZqZu5pI_yG5wi3R28rnfUFHFHvaXSB0FQOUUYvyPFPr6sRn4dNX6-xlFi7d-VXhRqMlAdEDzybWol4ZVJJOfsq4YwAuB0RSaq24l_rjFD9_el80JonA264mMyP8ZRUIG8EfM0lZ2Kw4-9putYdLBBZdqgWv9eHF0ePxHyOxsk9sb8VWRuLxXBesex6RZbklQy67fTrRU2rEUjHV8f5zTFb2CFmoDoY-D41KVs2tsQA-t_s5OxVld-coyJNZkUqyI5cdHHu4IruMpBEuRV9V7oBXGmpi5LoxVOVMMYuvM2qej0UxWuDq8YPXm3vSo71VP27w23r9StfoCifih6dAX0tao_wDEIS-LrhcqOFKW65jjwWpFRBZPBWD8W8fs-p6Zlb4ehfPzZ4=w962-h861?auditContext=prefetch" alt="Game Nights">
-                <div class="card-content">
-                    <h3>Planning</h3>
-                    <p>Have something you want to do? Cool ideas? Let us know or help us plan it!</p>
+                <div class="event-card">
+                    <div class="image-wrapper">
+                        <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_Go5Skyh7uLQac5TcaRZrUyDtjFVOfO8pbmGL-L2r-yQ93IXHhRNA6s1QDfLBXctR4unzTOpKSjeXAwhqClpgItJTW0qBuyTXFQe0-ZD8w1F5Y2c6y9HErcO8VsaBqvxOGJ5-vzYZqjmPwZuLKhcpPgoOefnIP_JvvkHcrxmTdI8S1A3gLYOJTARkpZ_S9LyPM8lLE_FpS0mepwMHlUK2sOsH1_3DcYqL6nbaF-8UmxRXmlXrS_jbHDm4oUVCBzJwANNTTaOF73VinTsb3WEJyZePi5GrBaaHwEL5tBCAcuiplR4UA3jcXYT2nSkLCv-vIlvmnwlVYmgZIcTkpyplkEbr8O8KEMBm7VQ0Bx-QSU1ZpcpIAweHBjQPZcUkO0znQPZKPVN0QSQ6QSSFF9WXknyYO79vXthMpgIv6cU2rnT1KVnMz_i4OxqUbeXmqn_90iSTrFosenIDzcQjpigH2J1yxgdisuy53kSreveoh9ZQsSc9KwZUenE-Rhp71OGTyDXJzUqQ6YyblC9cGHaWqWuV4gGfH2LqWO0UmNAoG02Hd2GPXqsUEFvZdBnd13GbswNGCE7VbLuic4Z_oHRRAObWlwvOVRR57QyaL3LAVXfNJ2d1qqNz51SQSM_Z7xzkj8qz2A8ko7U_KgWR6pD2S5am6HylDnQ7BpaxiirxpS5XllKm98HPUjW2fzipn9l_ESDGo1GrvsOBb5tMXadDI1IwJz7vRTLAvyaprPfIlkgMwfZqlxYZ6scLsuhKD4dJwNmq0mlNxKfdOcSh89qLORXeyWj1_XymwMQDMe7LU0UKG_j7qbd8ujCQQrgwVD94vALf20_p3TPhGrshoeTnXCFHGgjYjaxdvEoOMJAc8nE0yDkoQvLmr6bcyBF-FUTiKatZuYDS9HGu4GZ2z_PNgeZI019KPOKdh6rIkS6P08QMtxb6uNWiV7IllQUwkXD9W2YZhKhfPdiM1b7El5iEEUeRjF4pGWtsz787gmmpNUxG2oxmnmnJkWFlZbxaB0uen797UjWRauu7wzPLKt01QOHO4s2K75HXmafHlm2REM9eOGvn1ZHP5vWFVvtYaTJFfxcQZyDyuDAPHWjxZf6h3fxFxPTqoy_btl8GceMQnpOS4aozK3YHtKreXtZehwnteTLXTTtjnm=w1183-h868?auditContext=prefetch">
+                    </div>
+                    <div class="event-content">
+                        <span class="badge">3rd Saturday</span>
+                        <h4>Service Day</h4>
+                        <p>Giving back to our local area through group volunteer projects.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card">
-                <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_GPwzjNoBkNI_slNHB-ths6G_MFuSa6gjnjEmwWPqOzv9yKx0p9rnetag2i7BnuQWoCk3hzUxWVplWwHm0DMrwZ0FFAe_TaUcyU3S19d8D04TXKxqRz2DbKK94rrpe5Kpuu568SHd_FY3DLOs4Gy3TLHNUqCJ-TOsSEl01MHnzOoYPbDZ_HiwH9nmqxkhbTjyb5LvFf02S94TfyQJ3BbFDhpHkdQKmWtVzwcQeDX9KIqu4q5BuaRVtGFAbu0ljDdgSPlkgUFobNLK8avkPT2A3f4NurD_GTWNOh3kGNPUTGxhDLd-dMBieGuvEgXL3-UOhX8DDb8n8Ry6Yu6IX3I0VEidyz2OlT-lcyJoMMus5OnfyLK4In5Qixgra-m0Xqt6Yl5tDy2Hj2vPpo37Bi3FQfsBPcIPMivhRALWKoPC0WF974zPTMIPkanDo2WANAb9vbHr-SKKfFcYwKdXgXeTWuA6LLu5Sx9FfecF52SG9eztpixrDzvavBKX9o8ddhgNSbfZnVVjVie3D1518vCIAbOSGDuanUnweqNwmYaLghgob9iOhVyRNOypZ1RpZugYefhD6Wa-wFDfqt48COoqQ0hjIsu3PFtPqgFBnKOcguXC9aEXVnZYi4V5zf5exgyg4imw0CXlgj5o5WedtwUJd5iVUzKuqYlmTSfmE5AnWETFcbHPZMmJ2_aPEiHimfWVBXyusTYoRQ3VWZnAh9auir30PKrOlHOUfMcbaEoTAPPpLiLxOKL_dJaCZNFUe8IiGQ7k0LZZVhE1JdKIViI-X1Q302yTRadbPSQ0O3QhgopW-xf1GMWojt0VXVqrqkiSBpfmif8mqXk03dOeXjrbnbUH1zeWhuAMv0c0cP53yvK4jUfuhJBH9Nn-h52jubtm9tNd_TQ4XN6q-VloOZJekobkGyC0HVc6vFDffXHEbJCS-ecc8UlW6c0niQRFk1l1YLXi-0KFfOJKtnSuMuUg8qnVwZoxIjfxoL17iPpJKUqqa-VfpM_iH392hy6bmPvQA3JKtObqXfSsYARHyzSr_sz7PPhLMGyXGfK0tCvSq1l3YDFDAJLFB2pxna00mmpnUrnnRb2_EqdcqqPrNHFYoX2YrcdeI=w962-h861?auditContext=prefetch">
-                <div class="card-content">
-                    <h3>Night Crawlers</h3>
-                    <p>You think your sleep schedule is messed up, try ours! The platinum level of adventures, every Tuesday at midnight we go out for a wild time.</p>
+                <div class="event-card">
+                    <div class="image-wrapper">
+                        <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_FdzrewjVmCLRzrUNfeFC3FwpiKuhdfHyoq-3Bw90qGw5F9-TGRSx_UIgUrnUrnoG3FtSo3gk5Vic1PP8DmbtWDzog6SnNSVLrx_06NXotK8VomFP1-ztojXUYNgCfdoWHx0r5w3jFhVtJd1zjBWeihBhvwC3cmbzXL8cueLwIqcTKYS9O5Vz889g_nRNPoEjLjTk7HFw8w_qLijU05dQzjNAnZ9t5KhswtbJfDKmvWtVcM7FPJoJFCMvpMhaBoDzik2-ohKS9gyOZu72i5YZkbYAqJKN-AUNJhRGQgKgJktwhYoWHSNfF_zuD71oCz1aV1WUlPY_dnp8D1oRNHz9fMuYDlS0g5tgxfkoofh5CEaqced9dLTmSke1oD9NjkboDc3GLMyQ86RPCdXZTgw5XUuwPmGe-c2Ns_zFa2qUgGsw95Z2a08qxa6ZJtHx_SGz--zgQYdo-6NO0_dI-xNGc-rjJLnXYjlTeC4JaKzLZOI7-Wbx6_LlvX8hLeshPiJ2xWrOYN1JH4CNS0aFncAsnFh2DWAQsv1xJa66iHgUmazCQg8ZPrh1YEHlLcr5tBNpP5-GvQ0B4ObLghWUh6P3KfVaeiNpqqsZr-y7Xyw0-8p-UBcCXSIQSUibdj10u7RGWLIiOyeFZBqpp1Lt766fe_wan3pjv7rvqJv6Op9ndWEDkkiD88ku09Ie2GXU6jEeHYJADUXIWqvrO8-j6EvWoQBwtBmIXDWhEWMSuImZQ0k834BSBCnInJUh8Ahmn75Hc1AX0SSjeCnIkFB1gtRiCWxTrJks8tVB7muKbplV8tK9Auurvr79zJV30_TUEZUA_DHmeUUHgLS8VPl-LojX0BYDUHuXLuq1VP9JChh5Ntqtq6E5ytl1u6qH4_0hD9dep0_Y7ConQJA98eXep9nSt8k8DQxxUM9ZJB9CPiZep6r1VBFhrkOG1gxTYanEFCdxLygL250SYrpGX7TveWpaoRELAeiPda6ENH48aVjr2wBh9rDHQzTY7f6_RzBI5C4Jyj2SrVb4kzTmagNVDCD0sQsRG_XO0SYASqZoCvNgG2fzbeBB55m5sTuz4NrmBMrXQPlEWIr3iHSFNUsyG3r57WLz-wKfyFtBWvt9pTuFBikU7C5oIcavsyljlF331Sx_mGprpF38lFGg=w1920-h868?auditContext=forDisplay" alt="Every Sunday Game Night">
+                    </div>
+                    <div class="event-content">
+                        <span class="badge">Every Sunday</span>
+                        <h4>Sunday Game Night</h4>
+                        <p>Board games, card games, and multiplayer console setups.</p>
+                    </div>
                 </div>
+
             </div>
-
-        </section>
-
-        <section class="cta">
-            <h2>Ready to join?</h2>
-            <p>Send a text! 3852394395</p>
-            <a href="https://www.instagram.com/miles__baxter/#" class="cta-btn" target="_blank">Instagram for light stalking</a>
-        </section>
+        </main>
 
         <footer>
-            <p>Adventure, Built for the bold.</p>
+            <div class="contact-info">
+                <p>Phone: <strong>3852394395</strong></p>
+                <p>Instagram: <a href="https://www.instagram.com/miles__baxter/#" target="_blank">@miles__baxter</a></p>
+            </div>
+            
+            <div class="dropbox-note">
+                <p>📸 <strong>Want event photos?</strong> Text me for access to the Dropbox link!</p>
+            </div>
         </footer>
-
     </div>
 
 </body>
