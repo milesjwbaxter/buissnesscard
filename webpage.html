@@ -125,7 +125,7 @@
             border: 1px solid var(--card-border);
             border-radius: 24px;
             padding: 40px 30px;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             overflow: hidden;
@@ -171,6 +171,83 @@
             transform: translateY(-3px);
             box-shadow: 0 15px 30px -5px rgba(236, 72, 153, 0.6);
             filter: brightness(1.1);
+        }
+
+        /* Dynamic Upcoming Events Section Container */
+        .upcoming-container-wrapper {
+            margin-bottom: 45px;
+        }
+
+        .section-header {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .upcoming-list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .upcoming-item-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-hover-border);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 15px 25px -10px rgba(139, 92, 246, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .upcoming-item-card:hover {
+            transform: translateY(-5px);
+            border-color: #ec4899;
+            box-shadow: 0 20px 30px -10px rgba(236, 72, 153, 0.3);
+        }
+
+        .upcoming-item-card h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 8px 0 6px 0;
+            color: var(--text-main);
+        }
+
+        .upcoming-item-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .card-details-link {
+            display: inline-block;
+            margin-top: 14px;
+            color: #a78bfa;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .upcoming-item-card:hover .card-details-link {
+            color: #ec4899;
+            text-decoration: underline;
         }
 
         /* Schedule Grid Layout */
@@ -329,57 +406,67 @@
                 </div>
             </div>
 
-            <div class="schedule-grid">
-             <a href="Party.html" style="text-decoration: none; color: inherit; display: block;">
-    <div class="event-card">
-        <div class="image-wrapper">
-            <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_HidAlqBP_HU0siYWnBxHFV2HwvqpBiUkWD6aFOjDPLZYRdDhBJWo75fMYHizf2sO8Iwl0deOwKKtX0IQcCVjbNGaOdxLuFVE2yVFu2V0ci0qaf-p3chpjoP0p7eIUOwZ06ysfeiq-fRU-kMKOqRPaWYLG0Rfsri2_sIBboFUHrzhNPe3zYihedZQyGVp4o6iJcN6VNwCcf-etK7H2SgnE0za9dnBusFzhyvbdAiWNeHdYPwiICEQuww0b4t6D_doHbDcXskRtvZnXpOSFni5zC1iC50DZ67Krm_Hg9LOd7QVIYl86IMOwTfmD7l54fehgGEobOKRSwA2_AXi7K33BudETmX-hTJMkfBhdwYehDBkDc6iXaZ94134IpYnoiQWofqrGe-lTxWjicae4rvTksWBY03KRx02XIwX4yP0E5BWOKsIEAtSI7Ndvy7LEzuUsgXV_32PdcZsDHmdYm2TfzeO5Lb1H0fq4L6Z1yeK3sq9fPbNZHqXwsWr3hAn6VHEXECNB7uj4EX-Hln6QreuhyFWKUpkVQoAWsepxor0_FG4vxZXEn7__JVpRHBEbZU-u5fdwVyNq9lRyjNQqvwuxZfhqbs5W0aqGP1M3p-bWe0fzYd5FgjLU8eFj8PWuLGVXW89hV7i9NNbSwGMvInhUgSUuU-H9JX2mCC3-YSXLYiM3RZiJq6fRBIPbZwk19jTlcjWjfyi5OkRma3QsWrweRloAR2ETZ4wrkqg2apPYwEmOw0ZBFYVO1R4oDk5zXiNz1AGI-GiV6psfZAh5rSavf4NKcPUzBtY6Ts1GxGHFrdiANrXtTR0dI6fJ5XGjoXLqYM-NBVi3pO72sHngRpA-L3NxvxT0K46cCm9egn1-lTdVogw8_OTmqS4do8DkO3YRwpiR4D2O-MRsgLJJtAG7-h1piti34tguvAFXynUdM3XYvDTrGITUPwJNCuMsDFf3h-wr9TR3vx1unZBKqBIGGKVVdgwG0xB2D7R60w7rbVzOvAjIscQFzmwj2dnygAEGB2RVTQiMwvJrwmOkqJnr0lQABu6y3Gt21aHmr9RspvCuGxHgg-p17tb8KEfNO1vHab8Y_V9yVOJHiT4GqnB1UmTMhQqvJppqw4_7ll7PDKxcS4kzsw1Wc9ypBdhUdWxkg8ZEh_yslcw=w1183-h868?auditContext=prefetch">
-        </div>
-        <div class="event-content">
-            <span class="badge">1st Friday</span>
-            <h4>Monthly Party</h4>
-            <p>Games, snacks, and music for everyone in the neighborhood!</p>
-        </div>
-    </div>
-</a>
-              <a href="Concert-Nights.html" style="text-decoration: none; color: inherit; display: block;">
-    <div class="event-card">
-        <div class="image-wrapper">
-            <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_GfDo2nwpoDw9K1lyBm7ZSAObJ5COrORL3upyKwnRdYp3uhQi3NHEILSZ3evqCZjUIHBfWiCKLUXaNKCh7xmPA3lxDepJU6jsTeO426vmnrkAB8nCgPIx8VK3dpXH3VvSl_OD8RH_fgoZ_-Syi02V5ym5ZzvkyaMvynD954FTuB2Le2uwKV7aAN8vvWSRLfG6dsGeFDity5w7UJruLS280B_Qyz8YBKGRozhHGZERLTmpDmVyNz-wgHgjoQ3O49fQQaexMk42XehBKkkkorLdAw6mEjBxwEuCl6mfY72a7YO3zS5qxVey8XX6YTP1yVESHcCjoBS2xESVp7neSyjZJXHqfyan4cablEissOLkZsm89seCwyP6GkwnpG1dIAbk5rdz5L73XV9X6s1UUK2JH043O38taqwINZeY6tZ36ZwgSGphsl9Cd_S52FILBupT2dIys5AAWIc9fHtcMYovn7qShfYGZSxSS5Y3-YQmA89RnaZDKTcT4gLlLQ0q2cQspnYKOyvvZmfRZp3KeOBARM7wErDyBFdqLiFFNdfdBDt3t4Bk2AvqD_b95RhxU-gRyZlDZHlTP8E2kQeOoqSTeJJAMFOw3b1ofgpPhj9Ic0DXga-cL_RpGzwlr9ClOK1o-_ymD0NGjtUI91vO4nhuj6L7-eDtEflKG9aHTXRP-654Z516O7vBHCXlvJjUzqZpeFc9mVKhoymzLsS6xksiTcj9RAkJZY2mBZ9gkVes4RNglgvzyx7fUFXZEzAVIVEOiN2b-Xxj9vofhYcMqY6gig7soz0B-PldN3wuQk1Gs3AwYOxjA_ftwbWoz-tZeYQ6bhR0GQJDFLFX9F5SOvQYLXC6vNI5ZT2UHn4bFySxl_IyNvtNkzBdk2JsKeETlMkj4JZVx2_WZHSCgJo1TB6kxCJqngVCWT5M4Yb3v67iQpPrO7vIfAS-iipxW7MDlvnQXIZeOBe06yiWvoahi6_1MkWM3uoNgxlb29Om4MuvbG1hn6qEFE3tJKAbZ6I6jq0VgV8jXZ_XDpIipv4q8aUjHgMxWS2JPyrddZb3PxFB7rOhq2YE0zCoT-i4gSKH4MhJoVgnOfylzKR1S--WtKRYVbBs5eUoiJ1p7iZCI4p_TKiIlc99DKkAT6c4XxBX8RAhKRACnaSKDCBw=w1437-h859?auditContext=prefetch" alt="Concert Nights">
-        </div>
-        <div class="event-content">
-            <span class="badge">2nd Friday</span>
-            <h4>Concert Nights</h4>
-            <p>Live band performances, open mic slots, and karaoke sessions.</p>
-        </div>
-    </div>
-</a>
-<a href="service_day.html" style="text-decoration: none; color: inherit; display: block;">
-    <div class="event-card">
-        <div class="image-wrapper">
-            <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_GNVS1SIqPItpZusyVoL8o3DpAWsg1KGWsp7wPT-GkIxNogMl09cgrN2ASBzi8IPaFQcPEB1lr2iZKEmKqPgxLhyJWb5-JkZWzvFa90uCFegdDCYNlmzEwlw4sb0pcUG_gR3nu4SUr58ccGX0IWnNQf231gIRBL40TrFJ8Ds5ZgOF2J-GTP35_vJFo-stzsPlytO-i1KQGgbwZmVpEpMGHlmCIpgOgnEXTclj2C8cn-2ZNRBhvLQm7DYcoPbRahuveV8pf77U1HOFu78idVBFLKdyGl_SOdQYbkWgSg-WjWqAbAjRQ5SwbXSgbHc31Gfd3Jm_prXXlTeD8OxEQuYoDm5yoeBVIOOV1MXuBUnKYuh9SWh3ZmOBVat9cHmqBXpw4Kp-mVNvanq6T_f8MtLRWfEesu_Zqe1p9PkA_aaQ3ldfO7pw0hpCDmgvtXVEEQOH1Z1wD_NQ-TX7IHksJcWF93sPsMkxHJLceLLBBnARVhluzP0dgMAy1CPnBs-XWZUr0hyItB54NAE-6tk-kO7xyaAe4MI2tdWAaYLi_kzcr9PPzP6ufezgamhyE4mklQRVEMkL7zuNlFNsz-SI9xkfyfzoq8Ui8C-i-q-n6gPSJpiJv7y8OyF_khI2vj2lz7-BnQIULddrP0NqSkHdFDSQU_CkMFSg6rzRuB8Tik47fEgu-V_L-yllZ-MncbA3lX9GYFvS_7xbNFzACJYQz4ozKw4NyzDBT_VxFYzBGdt5r0iFKT_DE9M0EOD-Lv67lSgkyWsYZ1tPeQ3iY9RDuz6nUwACHByGDuROFsRxl7j2dHsMDf1VA61ke7k76z5XzO8QwDnAnIzC1IazZNcR0yhjQiwtvux0M0gK-zzx-fgAVa67KRS5dKcvkehvUtrAM6wfA0llM08p-pmFesHoBlf3yGbXlpYU1wGkVk7aF-va3p0ZmAHSog31KpEZXXcuwKh3vtmrk8HMPQI9dGL4PoPxVT4bZrA6hHEdTAsj60pG4-UIjFjNZ77FZrzKZkakxDW122CC8cwKVBNBqSjzOTcbO_9kX04oLcLByJrupqYStL_57AbmKkos1gKC7iqOLuga7d64DH3_CIJefjEFvaUQfeQWrmFE-Jd2Q0fk623WbobRBlN-lz5uxfFz2wAn8N3MAwOPQKdJL9OQ=w958-h868?auditContext=prefetch" alt="Service Day">
-        </div>
-        <div class="event-content">
-            <span class="badge">3rd Saturday</span>
-            <h4>Service Day</h4>
-            <p>Community projects, neighborhood cleanup, and service activities.</p>
-        </div>
-    </div>
-</a>
-<a href="sundaygamenight.html" style="text-decoration: none; color: inherit; display: block;">
-                <div class="event-card">
-
-                <div class="event-card">
-                    <div class="image-wrapper">
-                        <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_FdzrewjVmCLRzrUNfeFC3FwpiKuhdfHyoq-3Bw90qGw5F9-TGRSx_UIgUrnUrnoG3FtSo3gk5Vic1PP8DmbtWDzog6SnNSVLrx_06NXotK8VomFP1-ztojXUYNgCfdoWHx0r5w3jFhVtJd1zjBWeihBhvwC3cmbzXL8cueLwIqcTKYS9O5Vz889g_nRNPoEjLjTk7HFw8w_qLijU05dQzjNAnZ9t5KhswtbJfDKmvWtVcM7FPJoJFCMvpMhaBoDzik2-ohKS9gyOZu72i5YZkbYAqJKN-AUNJhRGQgKgJktwhYoWHSNfF_zuD71oCz1aV1WUlPY_dnp8D1oRNHz9fMuYDlS0g5tgxfkoofh5CEaqced9dLTmSke1oD9NjkboDc3GLMyQ86RPCdXZTgw5XUuwPmGe-c2Ns_zFa2qUgGsw95Z2a08qxa6ZJtHx_SGz--zgQYdo-6NO0_dI-xNGc-rjJLnXYjlTeC4JaKzLZOI7-Wbx6_LlvX8hLeshPiJ2xWrOYN1JH4CNS0aFncAsnFh2DWAQsv1xJa66iHgUmazCQg8ZPrh1YEHlLcr5tBNpP5-GvQ0B4ObLghWUh6P3KfVaeiNpqqsZr-y7Xyw0-8p-UBcCXSIQSUibdj10u7RGWLIiOyeFZBqpp1Lt766fe_wan3pjv7rvqJv6Op9ndWEDkkiD88ku09Ie2GXU6jEeHYJADUXIWqvrO8-j6EvWoQBwtBmIXDWhEWMSuImZQ0k834BSBCnInJUh8Ahmn75Hc1AX0SSjeCnIkFB1gtRiCWxTrJks8tVB7muKbplV8tK9Auurvr79zJV30_TUEZUA_DHmeUUHgLS8VPl-LojX0BYDUHuXLuq1VP9JChh5Ntqtq6E5ytl1u6qH4_0hD9dep0_Y7ConQJA98eXep9nSt8k8DQxxUM9ZJB9CPiZep6r1VBFhrkOG1gxTYanEFCdxLygL250SYrpGX7TveWpaoRELAeiPda6ENH48aVjr2wBh9rDHQzTY7f6_RzBI5C4Jyj2SrVb4kzTmagNVDCD0sQsRG_XO0SYASqZoCvNgG2fzbeBB55m5sTuz4NrmBMrXQPlEWIr3iHSFNUsyG3r57WLz-wKfyFtBWvt9pTuFBikU7C5oIcavsyljlF331Sx_mGprpF38lFGg=w1920-h868?auditContext=forDisplay" alt="Every Sunday Game Night">
-                    </div>
-                    <div class="event-content">
-                        <span class="badge">Every Sunday</span>
-                        <h4>Sunday Game Night</h4>
-                        <p>Board games, card games, and multiplayer console setups.</p>
-                    </div>
+            <div class="upcoming-container-wrapper" id="upcoming-wrapper" style="display: none;">
+                <div class="section-header">
+                    <h3 class="section-title">Upcoming Schedule & Events</h3>
+                    <p class="section-subtitle">Click on any card below to see more details.</p>
                 </div>
+                <div class="upcoming-list-grid" id="upcoming-list">
+                    </div>
+            </div>
 
+            <div class="schedule-grid">
+                <a href="Party.html" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="event-card">
+                        <div class="image-wrapper">
+                            <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_HidAlqBP_HU0siYWnBxHFV2HwvqpBiUkWD6aFOjDPLZYRdDhBJWo75fMYHizf2sO8Iwl0deOwKKtX0IQcCVjbNGaOdxLuFVE2yVFu2V0ci0qaf-p3chpjoP0p7eIUOwZ06ysfeiq-fRU-kMKOqRPaWYLG0Rfsri2_sIBboFUHrzhNPe3zYihedZQyGVp4o6iJcN6VNwCcf-etK7H2SgnE0za9dnBusFzhyvbdAiWNeHdYPwiICEQuww0b4t6D_doHbDcXskRtvZnXpOSFni5zC1iC50DZ67Krm_Hg9LOd7QVIYl86IMOwTfmD7l54fehgGEobOKRSwA2_AXi7K33BudETmX-hTJMkfBhdwYehDBkDc6iXaZ94134IpYnoiQWofqrGe-lTxWjicae4rvTksWBY03KRx02XIwX4yP0E5BWOKsIEAtSI7Ndvy7LEzuUsgXV_32PdcZsDHmdYm2TfzeO5Lb1H0fq4L6Z1yeK3sq9fPbNZHqXwsWr3hAn6VHEXECNB7uj4EX-Hln6QreuhyFWKUpkVQoAWsepxor0_FG4vxZXEn7__JVpRHBEbZU-u5fdwVyNq9lRyjNQqvwuxZfhqbs5W0aqGP1M3p-bWe0fzYd5FgjLU8eFj8PWuLGVXW89hV7i9NNbSwGMvInhUgSUuU-H9JX2mCC3-YSXLYiM3RZiJq6fRBIPbZwk19jTlcjWjfyi5OkRma3QsWrweRloAR2ETZ4wrkqg2apPYwEmOw0ZBFYVO1R4oDk5zXiNz1AGI-GiV6psfZAh5rSavf4NKcPUzBtY6Ts1GxGHFrdiANrXtTR0dI6fJ5XGjoXLqYM-NBVi3pO72sHngRpA-L3NxvxT0K46cCm9egn1-lTdVogw8_OTmqS4do8DkO3YRwpiR4D2O-MRsgLJJtAG7-h1piti34tguvAFXynUdM3XYvDTrGITUPwJNCuMsDFf3h-wr9TR3vx1unZBKqBIGGKVVdgwG0xB2D7R60w7rbVzOvAjIscQFzmwj2dnygAEGB2RVTQiMwvJrwmOkqJnr0lQABu6y3Gt21aHmr9RspvCuGxHgg-p17tb8KEfNO1vHab8Y_V9yVOJHiT4GqnB1UmTMhQqvJppqw4_7ll7PDKxcS4kzsw1Wc9ypBdhUdWxkg8ZEh_yslcw=w1183-h868?auditContext=prefetch">
+                        </div>
+                        <div class="event-content">
+                            <span class="badge">1st Friday</span>
+                            <h4>Monthly Party</h4>
+                            <p>Games, snacks, and music for everyone in the neighborhood!</p>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="Concert-Nights.html" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="event-card">
+                        <div class="image-wrapper">
+                            <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_GfDo2nwpoDw9K1lyBm7ZSAObJ5COrORL3upyKwnRdYp3uhQi3NHEILSZ3evqCZjUIHBfWiCKLUXaNKCh7xmPA3lxDepJU6jsTeO426vmnrkAB8nCgPIx8VK3dpXH3VvSl_OD8RH_fgoZ_-Syi02V5ym5ZzvkyaMvynD954FTuB2Le2uwKV7aAN8vvWSRLfG6dsGeFDity5w7UJruLS280B_Qyz8YBKGRozhHGZERLTmpDmVyNz-wgHgjoQ3O49fQQaexMk42XehBKkkkorLdAw6mEjBxwEuCl6mfY72a7YO3zS5qxVey8XX6YTP1yVESHcCjoBS2xESVp7neSyjZJXHqfyan4cablEissOLkZsm89seCwyP6GkwnpG1dIAbk5rdz5L73XV9X6s1UUK2JH043O38taqwINZeY6tZ36ZwgSGphsl9Cd_S52FILBupT2dIys5AAWIc9fHtcMYovn7qShfYGZSxSS5Y3-YQmA89RnaZDKTcT4gLlLQ0q2cQspnYKOyvvZmfRZp3KeOBARM7wErDyBFdqLiFFNdfdBDt3t4Bk2AvqD_b95RhxU-gRyZlDZHlTP8E2kQeOoqSTeJJAMFOw3b1ofgpPhj9Ic0DXga-cL_RpGzwlr9ClOK1o-_ymD0NGjtUI91vO4nhuj6L7-eDtEflKG9aHTXRP-654Z516O7vBHCXlvJjUzqZpeFc9mVKhoymzLsS6xksiTcj9RAkJZY2mBZ9gkVes4RNglgvzyx7fUFXZEzAVIVEOiN2b-Xxj9vofhYcMqY6gig7soz0B-PldN3wuQk1Gs3AwYOxjA_ftwbWoz-tZeYQ6bhR0GQJDFLFX9F5SOvQYLXC6vNI5ZT2UHn4bFySxl_IyNvtNkzBdk2JsKeETlMkj4JZVx2_WZHSCgJo1TB6kxCJqngVCWT5M4Yb3v67iQpPrO7vIfAS-iipxW7MDlvnQXIZeOBe06yiWvoahi6_1MkWM3uoNgxlb29Om4MuvbG1hn6qEFE3tJKAbZ6I6jq0VgV8jXZ_XDpIipv4q8aUjHgMxWS2JPyrddZb3PxFB7rOhq2YE0zCoT-i4gSKH4MhJoVgnOfylzKR1S--WtKRYVbBs5eUoiJ1p7iZCI4p_TKiIlc99DKkAT6c4XxBX8RAhKRACnaSKDCBw=w1437-h859?auditContext=prefetch" alt="Concert Nights">
+                        </div>
+                        <div class="event-content">
+                            <span class="badge">2nd Friday</span>
+                            <h4>Concert Nights</h4>
+                            <p>Live band performances, open mic slots, and karaoke sessions.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="service_day.html" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="event-card">
+                        <div class="image-wrapper">
+                            <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_GNVS1SIqPItpZusyVoL8o3DpAWsg1KGWsp7wPT-GkIxNogMl09cgrN2ASBzi8IPaFQcPEB1lr2iZKEmKqPgxLhyJWb5-JkZWzvFa90uCFegdDCYNlmzEwlw4sb0pcUG_gR3nu4SUr58ccGX0IWnNQf231gIRBL40TrFJ8Ds5ZgOF2J-GTP35_vJFo-stzsPlytO-i1KQGgbwZmVpEpMGHlmCIpgOgnEXTclj2C8cn-2ZNRBhvLQm7DYcoPbRahuveV8pf77U1HOFu78idVBFLKdyGl_SOdQYbkWgSg-WjWqAbAjRQ5SwbXSgbHc31Gfd3Jm_prXXlTeD8OxEQuYoDm5yoeBVIOOV1MXuBUnKYuh9SWh3ZmOBVat9cHmqBXpw4Kp-mVNvanq6T_f8MtLRWfEesu_Zqe1p9PkA_aaQ3ldfO7pw0hpCDmgvtXVEEQOH1Z1wD_NQ-TX7IHksJcWF93sPsMkxHJLceLLBBnARVhluzP0dgMAy1CPnBs-XWZUr0hyItB54NAE-6tk-kO7xyaAe4MI2tdWAaYLi_kzcr9PPzP6ufezgamhyE4mklQRVEMkL7zuNlFNsz-SI9xkfyfzoq8Ui8C-i-q-n6gPSJpiJv7y8OyF_khI2vj2lz7-BnQIULddrP0NqSkHdFDSQU_CkMFSg6rzRuB8Tik47fEgu-V_L-yllZ-MncbA3lX9GYFvS_7xbNFzACJYQz4ozKw4NyzDBT_VxFYzBGdt5r0iFKT_DE9M0EOD-Lv67lSgkyWsYZ1tPeQ3iY9RDuz6nUwACHByGDuROFsRxl7j2dHsMDf1VA61ke7k76z5XzO8QwDnAnIzC1IazZNcR0yhjQiwtvux0M0gK-zzx-fgAVa67KRS5dKcvkehvUtrAM6wfA0llM08p-pmFesHoBlf3yGbXlpYU1wGkVk7aF-va3p0ZmAHSog31KpEZXXcuwKh3vtmrk8HMPQI9dGL4PoPxVT4bZrA6hHEdTAsj60pG4-UIjFjNZ77FZrzKZkakxDW122CC8cwKVBNBqSjzOTcbO_9kX04oLcLByJrupqYStL_57AbmKkos1gKC7iqOLuga7d64DH3_CIJefjEFvaUQfeQWrmFE-Jd2Q0fk623WbobRBlN-lz5uxfFz2wAn8N3MAwOPQKdJL9OQ=w958-h868?auditContext=prefetch" alt="Service Day">
+                        </div>
+                        <div class="event-content">
+                            <span class="badge">3rd Saturday</span>
+                            <h4>Service Day</h4>
+                            <p>Community projects, neighborhood cleanup, and service activities.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="sundaygamenight.html" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="event-card">
+                        <div class="image-wrapper">
+                            <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_FdzrewjVmCLRzrUNfeFC3FwpiKuhdfHyoq-3Bw90qGw5F9-TGRSx_UIgUrnUrnoG3FtSo3gk5Vic1PP8DmbtWDzog6SnNSVLrx_06NXotK8VomFP1-ztojXUYNgCfdoWHx0r5w3jFhVtJd1zjBWeihBhvwC3cmbzXL8cueLwIqcTKYS9O5Vz889g_nRNPoEjLjTk7HFw8w_qLijU05dQzjNAnZ9t5KhswtbJfDKmvWtVcM7FPJoJFCMvpMhaBoDzik2-ohKS9gyOZu72i5YZkbYAqJKN-AUNJhRGQgKgJktwhYoWHSNfF_zuD71oCz1aV1WUlPY_dnp8D1oRNHz9fMuYDlS0g5tgxfkoofh5CEaqced9dLTmSke1oD9NjkboDc3GLMyQ86RPCdXZTgw5XUuwPmGe-c2Ns_zFa2qUgGsw95Z2a08qxa6ZJtHx_SGz--zgQYdo-6NO0_dI-xNGc-rjJLnXYjlTeC4JaKzLZOI7-Wbx6_LlvX8hLeshPiJ2xWrOYN1JH4CNS0aFncAsnFh2DWAQsv1xJa66iHgUmazCQg8ZPrh1YEHlLcr5tBNpP5-GvQ0B4ObLghWUh6P3KfVaeiNpqqsZr-y7Xyw0-8p-UBcCXSIQSUibdj10u7RGWLIiOyeFZBqpp1Lt766fe_wan3pjv7rvqJv6Op9ndWEDkkiD88ku09Ie2GXU6jEeHYJADUXIWqvrO8-j6EvWoQBwtBmIXDWhEWMSuImZQ0k834BSBCnInJUh8Ahmn75Hc1AX0SSjeCnIkFB1gtRiCWxTrJks8tVB7muKbplV8tK9Auurvr79zJV30_TUEZUA_DHmeUUHgLS8VPl-LojX0BYDUHuXLuq1VP9JChh5Ntqtq6E5ytl1u6qH4_0hD9dep0_Y7ConQJA98eXep9nSt8k8DQxxUM9ZJB9CPiZep6r1VBFhrkOG1gxTYanEFCdxLygL250SYrpGX7TveWpaoRELAeiPda6ENH48aVjr2wBh9rDHQzTY7f6_RzBI5C4Jyj2SrVb4kzTmagNVDCD0sQsRG_XO0SYASqZoCvNgG2fzbeBB55m5sTuz4NrmBMrXQPlEWIr3iHSFNUsyG3r57WLz-wKfyFtBWvt9pTuFBikU7C5oIcavsyljlF331Sx_mGprpF38lFGg=w1920-h868?auditContext=forDisplay" alt="Every Sunday Game Night">
+                        </div>
+                        <div class="event-content">
+                            <span class="badge">Every Sunday</span>
+                            <h4>Sunday Game Night</h4>
+                            <p>Board games, card games, and multiplayer console setups.</p>
+                        </div>
+                    </div>
+                </a>
             </div>
         </main>
 
@@ -389,10 +476,47 @@
             </div>
             
             <div class="dropbox-note">
-                <p>📸 <strong>Want event photos?</strong> Text me for access to the Dropbox link!</p>
+                <p>Want event photos? Text me for access to the Dropbox link!</p>
             </div>
         </footer>
     </div>
 
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz-MVbEKOixXvHxcqZCfgEfyaKg3C3sYwlKzh0JCV9RnBfF1wYL__YjdyzsDVVaoTv2/exec';
+
+        fetch(scriptURL)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.length > 0) {
+                    const listContainer = document.getElementById('upcoming-list');
+                    listContainer.innerHTML = ''; 
+
+                    data.forEach(event => {
+                        const card = document.createElement('a');
+                        card.className = 'upcoming-item-card';
+                        
+                        // Pulls the link dynamically from column E (mapped as event.link)
+                        card.href = event.link || '#';
+                        card.target = '_blank'; // Opens the detail link in a new tab
+                        
+                        card.innerHTML = `
+                            <div>
+                                <span class="badge">${event.date}</span>
+                                <h4>${event.name}</h4>
+                            </div>
+                            <div>
+                                <p style="margin-top: 12px;">Time: ${event.time}</p>
+                                <span class="card-details-link">See Details →</span>
+                            </div>
+                        `;
+                        
+                        listContainer.appendChild(card);
+                    });
+
+                    document.getElementById('upcoming-wrapper').style.display = 'block';
+                }
+            })
+            .catch(error => console.error('Error fetching upcoming events:', error));
+    </script>
 </body>
 </html>
