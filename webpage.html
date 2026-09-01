@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -493,17 +492,10 @@
                     listContainer.innerHTML = ''; 
 
                     data.forEach(event => {
-                        const card = document.createElement('a');
+                       const card = document.createElement('div');
                         card.className = 'upcoming-item-card';
                         
-                        // Properly sets the link from column E and ensures it opens in a new tab
-                        if (event.link && event.link.trim() !== "") {
-                            card.href = event.link.trim();
-                            card.target = '_blank';
-                            card.rel = 'noopener noreferrer';
-                        } else {
-                            card.href = '#';
-                        }
+                       
                         
                         card.innerHTML = `
                             <div>
@@ -511,8 +503,8 @@
                                 <h4>${event.name}</h4>
                             </div>
                             <div>
-                                <p style="margin-top: 12px;">Time: ${event.time}</p>
-                                <span class="card-details-link">See Details →</span>
+                                <p style="margin-top: 12px;"> ${event.time}</p>
+                               
                             </div>
                         `;
                         
