@@ -163,6 +163,8 @@
             font-weight: 700;
             font-size: 1rem;
             text-decoration: none;
+            border: none;
+            cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.5);
         }
@@ -171,6 +173,105 @@
             transform: translateY(-3px);
             box-shadow: 0 15px 30px -5px rgba(236, 72, 153, 0.6);
             filter: brightness(1.1);
+        }
+
+        /* Form Modal Overlay */
+        .form-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(7, 9, 14, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .form-modal-container {
+            position: relative;
+            background: #0f131d;
+            border: 1px solid var(--card-hover-border);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 700px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(168, 85, 247, 0.3);
+            overflow: hidden;
+        }
+
+        .form-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--card-border);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .form-tabs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-gradient);
+            color: #ffffff;
+            border-color: transparent;
+        }
+
+        .close-modal-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .close-modal-btn:hover {
+            background: rgba(236, 72, 153, 0.4);
+        }
+
+        .form-iframe-container {
+            width: 100%;
+            flex-grow: 1;
+            overflow-y: auto;
+            background: #ffffff;
+        }
+
+        .form-iframe-container iframe {
+            width: 100%;
+            border: none;
+            display: none;
+        }
+
+        .form-iframe-container iframe.active {
+            display: block;
         }
 
         /* Dynamic Upcoming Events Section Container */
@@ -400,9 +501,28 @@
                 <p>Want to perform on stage? Pick your category below to sign up:</p>
                 
                 <div class="btn-group">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdssuqZgjSETVhLYLQyCj33wBBLv0jfe3eVmEmHhtOBNrLSqw/viewform?usp=header" target="_blank" class="btn">Band Sign-Up</a>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjAoS9IpgHwi3PbAaOkYsmTGjLXxiPIutP_e9neKQ8Vx2WVg/viewform?usp=header" target="_blank" class="btn">Open Mic Sign-Up</a>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeK6yrx_OE6NegcpLhy3yEwGwyVuKnTMOfadCygssYl3mc_xQ/viewform?usp=publish-editor" target="_blank" class="btn">Karaoke Sign-Up</a>
+                    <button class="btn" onclick="openForm('band')">Band Sign-Up</button>
+                    <button class="btn" onclick="openForm('openmic')">Open Mic Sign-Up</button>
+                    <button class="btn" onclick="openForm('karaoke')">Karaoke Sign-Up</button>
+                </div>
+            </div>
+
+            <!-- Embedded Form Pop-up Overlay -->
+            <div class="form-modal-overlay" id="formModal">
+                <div class="form-modal-container">
+                    <div class="form-modal-header">
+                        <div class="form-tabs">
+                            <button class="tab-btn" id="tab-band" onclick="switchTab('band')">Band</button>
+                            <button class="tab-btn" id="tab-openmic" onclick="switchTab('openmic')">Open Mic</button>
+                            <button class="tab-btn" id="tab-karaoke" onclick="switchTab('karaoke')">Karaoke</button>
+                        </div>
+                        <button class="close-modal-btn" onclick="closeForm()">&times;</button>
+                    </div>
+                    <div class="form-iframe-container">
+                        <iframe id="iframe-band" src="https://docs.google.com/forms/d/e/1FAIpQLSdssuqZgjSETVhLYLQyCj33wBBLv0jfe3eVmEmHhtOBNrLSqw/viewform?embedded=true" height="1650">Loading…</iframe>
+                        <iframe id="iframe-openmic" src="https://docs.google.com/forms/d/e/1FAIpQLSdjAoS9IpgHwi3PbAaOkYsmTGjLXxiPIutP_e9neKQ8Vx2WVg/viewform?embedded=true" height="903">Loading…</iframe>
+                        <iframe id="iframe-karaoke" src="https://docs.google.com/forms/d/e/1FAIpQLSeK6yrx_OE6NegcpLhy3yEwGwyVuKnTMOfadCygssYl3mc_xQ/viewform?embedded=true" height="587">Loading…</iframe>
+                    </div>
                 </div>
             </div>
 
@@ -412,7 +532,7 @@
                     <p class="section-subtitle">Click on cards at bottom for details</p>
                 </div>
                 <div class="upcoming-list-grid" id="upcoming-list">
-                    </div>
+                </div>
             </div>
 
             <div class="schedule-grid">
@@ -529,6 +649,39 @@
                 }
             })
             .catch(error => console.error('Error fetching upcoming events:', error));
+
+        /* Modal & Form Switching Logic */
+        function openForm(type) {
+            document.getElementById('formModal').style.display = 'flex';
+            switchTab(type);
+        }
+
+        function closeForm() {
+            document.getElementById('formModal').style.display = 'none';
+        }
+
+        function switchTab(type) {
+            const types = ['band', 'openmic', 'karaoke'];
+            types.forEach(t => {
+                const iframe = document.getElementById(`iframe-${t}`);
+                const tab = document.getElementById(`tab-${t}`);
+                if (t === type) {
+                    iframe.classList.add('active');
+                    tab.classList.add('active');
+                } else {
+                    iframe.classList.remove('active');
+                    tab.classList.remove('active');
+                }
+            });
+        }
+
+        // Close modal when clicking outside of the modal container
+        window.onclick = function(event) {
+            const modal = document.getElementById('formModal');
+            if (event.target === modal) {
+                closeForm();
+            }
+        };
     </script>
 </body>
 </html>
