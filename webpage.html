@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -495,9 +496,14 @@
                         const card = document.createElement('a');
                         card.className = 'upcoming-item-card';
                         
-                        // Pulls the link dynamically from column E (mapped as event.link)
-                        card.href = event.link || '#';
-                        card.target = '_blank'; // Opens the detail link in a new tab
+                        // Properly sets the link from column E and ensures it opens in a new tab
+                        if (event.link && event.link.trim() !== "") {
+                            card.href = event.link.trim();
+                            card.target = '_blank';
+                            card.rel = 'noopener noreferrer';
+                        } else {
+                            card.href = '#';
+                        }
                         
                         card.innerHTML = `
                             <div>
@@ -520,3 +526,5 @@
     </script>
 </body>
 </html>
+
+```
