@@ -303,26 +303,18 @@
             gap: 20px;
         }
 
+        /* UPDATED: Clean static styling for upcoming event cards (no glow/hover effects) */
         .upcoming-item-card {
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--card-hover-border);
+            border: 1px solid var(--card-border);
             border-radius: 20px;
             padding: 24px;
-            box-shadow: 0 15px 25px -10px rgba(139, 92, 246, 0.2);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            text-decoration: none;
             color: inherit;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .upcoming-item-card:hover {
-            transform: translateY(-5px);
-            border-color: #ec4899;
-            box-shadow: 0 20px 30px -10px rgba(236, 72, 153, 0.3);
         }
 
         .upcoming-item-card h4 {
@@ -335,20 +327,6 @@
         .upcoming-item-card p {
             color: var(--text-muted);
             font-size: 0.95rem;
-        }
-
-        .card-details-link {
-            display: inline-block;
-            margin-top: 14px;
-            color: #a78bfa;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: color 0.2s ease;
-        }
-
-        .upcoming-item-card:hover .card-details-link {
-            color: #ec4899;
-            text-decoration: underline;
         }
 
         /* Schedule Grid Layout */
@@ -629,8 +607,6 @@
                        const card = document.createElement('div');
                         card.className = 'upcoming-item-card';
                         
-                        
-                        
                         card.innerHTML = `
                             <div>
                                 <span class="badge">${event.date}</span>
@@ -638,7 +614,6 @@
                             </div>
                             <div>
                                 <p style="margin-top: 12px;"> ${event.time}</p>
-                               
                             </div>
                         `;
                         
