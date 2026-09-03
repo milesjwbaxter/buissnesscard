@@ -277,6 +277,13 @@
         /* Dynamic Upcoming Events Section Container */
         .upcoming-container-wrapper {
             margin-bottom: 45px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.25);
         }
 
         .section-header {
@@ -284,8 +291,8 @@
         }
 
         .section-title {
-            font-size: 1.6rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: 800;
             margin-bottom: 4px;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
@@ -294,7 +301,7 @@
 
         .section-subtitle {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 1rem;
         }
 
         .upcoming-list-grid {
@@ -303,18 +310,59 @@
             gap: 20px;
         }
 
-        /* UPDATED: Clean static styling for upcoming event cards (no glow/hover effects) */
+        /* Enhanced Loading Card Visuals */
+        .loading-card {
+            background: var(--card-bg);
+            border: 1px dashed rgba(168, 85, 247, 0.4);
+            border-radius: 20px;
+            padding: 30px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.15);
+            border-top: 3px solid #a855f7;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #a78bfa;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
         .upcoming-item-card {
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
+            border: 1px solid var(--card-hover-border);
             border-radius: 20px;
             padding: 24px;
+            box-shadow: 0 15px 25px -10px rgba(139, 92, 246, 0.2);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            text-decoration: none;
             color: inherit;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .upcoming-item-card:hover {
+            transform: translateY(-5px);
+            border-color: #ec4899;
+            box-shadow: 0 20px 30px -10px rgba(236, 72, 153, 0.3);
         }
 
         .upcoming-item-card h4 {
@@ -327,6 +375,20 @@
         .upcoming-item-card p {
             color: var(--text-muted);
             font-size: 0.95rem;
+        }
+
+        .card-details-link {
+            display: inline-block;
+            margin-top: 14px;
+            color: #a78bfa;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .upcoming-item-card:hover .card-details-link {
+            color: #ec4899;
+            text-decoration: underline;
         }
 
         /* Schedule Grid Layout */
@@ -504,12 +566,16 @@
                 </div>
             </div>
 
-            <div class="upcoming-container-wrapper" id="upcoming-wrapper" style="display: none;">
+            <div class="upcoming-container-wrapper" id="upcoming-wrapper">
                 <div class="section-header">
                     <h3 class="section-title">Upcoming Schedule & Events</h3>
                     <p class="section-subtitle">Click on cards at bottom of page for details</p>
                 </div>
                 <div class="upcoming-list-grid" id="upcoming-list">
+                    <div class="loading-card">
+                        <div class="spinner"></div>
+                        <span class="loading-text">Loading upcoming events...</span>
+                    </div>
                 </div>
             </div>
 
@@ -599,12 +665,12 @@
         fetch(scriptURL)
             .then(response => response.json())
             .then(data => {
-                if (data && data.length > 0) {
-                    const listContainer = document.getElementById('upcoming-list');
-                    listContainer.innerHTML = ''; 
+                const listContainer = document.getElementById('upcoming-list');
+                listContainer.innerHTML = ''; 
 
+                if (data && data.length > 0) {
                     data.forEach(event => {
-                       const card = document.createElement('div');
+                        const card = document.createElement('div');
                         card.className = 'upcoming-item-card';
                         
                         card.innerHTML = `
@@ -619,11 +685,15 @@
                         
                         listContainer.appendChild(card);
                     });
-
-                    document.getElementById('upcoming-wrapper').style.display = 'block';
+                } else {
+                    listContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 1rem;">No upcoming events scheduled at this time.</p>';
                 }
             })
-            .catch(error => console.error('Error fetching upcoming events:', error));
+            .catch(error => {
+                console.error('Error fetching upcoming events:', error);
+                document.getElementById('upcoming-list').innerHTML = 
+                    '<p style="color: var(--text-muted); font-size: 1rem;">Unable to load events right now.</p>';
+            });
 
         /* Modal & Form Switching Logic */
         function openForm(type) {
