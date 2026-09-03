@@ -356,13 +356,13 @@
             justify-content: space-between;
             text-decoration: none;
             color: inherit;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: default;
         }
 
         .upcoming-item-card:hover {
-            transform: translateY(-5px);
-            border-color: #ec4899;
-            box-shadow: 0 20px 30px -10px rgba(236, 72, 153, 0.3);
+            transform: none;
+            border-color: var(--card-hover-border);
+            box-shadow: 0 15px 25px -10px rgba(139, 92, 246, 0.2);
         }
 
         .upcoming-item-card h4 {
@@ -387,8 +387,8 @@
         }
 
         .upcoming-item-card:hover .card-details-link {
-            color: #ec4899;
-            text-decoration: underline;
+            color: #a78bfa;
+            text-decoration: none;
         }
 
         /* Schedule Grid Layout */
