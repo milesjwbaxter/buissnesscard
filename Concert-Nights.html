@@ -254,7 +254,6 @@
             <div class="btn-group">
                 <button class="btn" onclick="openForm('band')">Band Sign-Up</button>
                 <button class="btn" onclick="openForm('openmic')">Open Mic Sign-Up</button>
-                <button class="btn" onclick="openForm('karaoke')">Karaoke Sign-Up</button>
             </div>
         </div>
 
@@ -276,14 +275,12 @@
                 <div class="form-tabs">
                     <button class="tab-btn" id="tab-band" onclick="switchTab('band')">Band</button>
                     <button class="tab-btn" id="tab-openmic" onclick="switchTab('openmic')">Open Mic</button>
-                    <button class="tab-btn" id="tab-karaoke" onclick="switchTab('karaoke')">Karaoke</button>
                 </div>
                 <button class="close-modal-btn" onclick="closeForm()">&times;</button>
             </div>
             <div class="form-iframe-container">
                 <iframe id="iframe-band" src="https://docs.google.com/forms/d/e/1FAIpQLSdssuqZgjSETVhLYLQyCj33wBBLv0jfe3eVmEmHhtOBNrLSqw/viewform?embedded=true">Loading…</iframe>
                 <iframe id="iframe-openmic" src="https://docs.google.com/forms/d/e/1FAIpQLSdjAoS9IpgHwi3PbAaOkYsmTGjLXxiPIutP_e9neKQ8Vx2WVg/viewform?embedded=true">Loading…</iframe>
-                <iframe id="iframe-karaoke" src="https://docs.google.com/forms/d/e/1FAIpQLSeK6yrx_OE6NegcpLhy3yEwGwyVuKnTMOfadCygssYl3mc_xQ/viewform?embedded=true">Loading…</iframe>
             </div>
         </div>
     </div>
@@ -299,7 +296,7 @@
         }
 
         function switchTab(type) {
-            const types = ['band', 'openmic', 'karaoke'];
+            const types = ['band', 'openmic'];
             types.forEach(t => {
                 const iframe = document.getElementById(`iframe-${t}`);
                 const tab = document.getElementById(`tab-${t}`);
