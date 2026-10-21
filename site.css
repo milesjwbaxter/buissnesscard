@@ -177,14 +177,15 @@
 
     .ticker { margin-top: 21px; overflow: hidden; border-block: 1px solid var(--line); }
     .ticker-inner {
-      width: max-content;
-      padding: 14px 0;
-      color: #c8c5ce;
-      font-size: .7rem;
-      font-weight: 900;
-      letter-spacing: .17em;
-      text-transform: uppercase;
-    }
+  width: 100%;
+  padding: 14px 0;
+  color: #c8c5ce;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+  text-align: center;
+}
     .ticker-inner span { margin: 0 20px; color: var(--coral); }
 
     .section { padding: 86px 0; }
