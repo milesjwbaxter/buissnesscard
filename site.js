@@ -1,202 +1,174 @@
-<!doctype html>
-<html lang="en">
-<head><head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7YTTVB14TM"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+(() => {
+  'use strict';
 
-      gtag('config', 'G-7YTTVB14TM');
-    </script>
-    <!-- Other head tags like title or CSS links -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#111116">
-  <meta name="description" content="Tree House is a Provo hangout for live music, parties, game nights, and community events.">
-  <link rel="icon" href="assets/treehouse-mark.svg" type="image/svg+xml">
-  <title>Tree House — Provo Events & Community</title>
-  <link rel="stylesheet" href="site.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="header-inner wrap">
-      <a class="brand" href="#top" aria-label="Tree House home">
-        <img src="assets/treehouse-logo.svg" alt="Tree House">
-        <span class="brand-caption">Events &<br>Community</span>
-      </a>
-      <button class="menu-btn" aria-expanded="false" aria-controls="main-nav">Menu</button>
-      <nav id="main-nav" aria-label="Main navigation">
-        <a href="home.html" aria-current="page">Home</a><a href="events.html">Events</a>
-        <a href="photos.html">Photos</a>
-        <a href="about.html">About</a>
-        <a href="suggestions.html">Suggestions</a><a class="nav-cta" href="concerts.html#performers">Get on Stage ↗</a>
-      </nav>
-    </div>
-  </header>
+  const EVENT_FEED = 'https://script.google.com/macros/s/AKfycbz-MVbEKOixXvHxcqZCfgEfyaKg3C3sYwlKzh0JCV9RnBfF1wYL__YjdyzsDVVaoTv2/exec';
+  const REFRESH_MS = 5 * 60 * 1000;
+  let eventCache = [];
+  let lastActiveElement = null;
 
-  <main id="top">
-    <section class="hero wrap" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <div class="kicker">Provo, Utah · Everyone’s invited</div>
-        <h1 id="hero-title">Find your<br><span>people.</span></h1>
-        <p>Live music, game nights, parties, and community events. Tree House is a place to hang out, try something new, and feel part of it.</p>
-        <div class="actions">
-          <a class="button" href="#events">Explore events <span aria-hidden="true">↓</span></a>
-          <a class="stage-cta" href="concerts.html#performers">Get on Stage ↗</a>
-        </div>
-      </div>
-      <div class="hero-photo">
-        <img src="assets/hero-treehouse-party.jpg" alt="Friends at a Tree House party with a hand-decorated Tree House pumpkin" fetchpriority="high">
-        <span class="photo-stamp">A good night at Tree House</span>
-      </div>
-    </section>
+  // Responsive site navigation.
+  const menuButton = document.querySelector('.menu-btn');
+  const nav = document.querySelector('#main-nav');
+  if (menuButton && nav) {
+    menuButton.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(open));
+    });
+    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+    }));
+  }
 
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-inner">LIVE MUSIC <span>✳</span> GAME NIGHTS <span>✳</span> GOOD COMPANY <span>✳</span> PROVO, UTAH <span>✳</span> LIVE MUSIC <span>✳</span> GAME NIGHTS <span>✳</span> GOOD COMPANY</div>
-    </div>
+  // Shared, read-only event feed. Build DOM nodes instead of injecting Sheet text as HTML.
+  const categoryMatches = {
+    concert: /concert|open\s*stage|open\s*mic|live\s*music|show/i,
+    party: /part(y|ies)/i,
+    game: /game|board.?game/i,
+    service: /service|cleanup|clean.?up/i,
+    temple: /temple/i,
+    volunteer: /volunteer|help.?out/i
+  };
 
-    <section class="section wrap" id="events">
-      <div class="section-head">
-        <div>
-          <div class="kicker">Pick your kind of night</div>
-          <h2>What’s happening</h2>
-        </div>
-        <p>Come for the music, stay for the people. There are plenty of ways to make Tree House part of your week.</p>
-      </div>
+  function addText(parent, tag, className, value) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    node.textContent = String(value ?? '').trim();
+    parent.appendChild(node);
+    return node;
+  }
 
-      <div class="event-grid">
-        <a class="event-card" href="parties.html">
-          <div class="event-photo"><img class="party-img" src="assets/party-night.jpg" alt="Friends enjoying a themed Tree House party" loading="lazy"></div>
-          <div class="event-label">Bring your crew</div>
-          <h3>Parties</h3>
-          <p>Games, snacks, and music for everyone in the neighborhood.</p>
-          <span class="card-link">Party details <span>↗</span></span>
-        </a>
+  function formatEvent(event, filter) {
+    const card = document.createElement('article');
+    card.className = 'live-event';
+    const title = String(event.name ?? event.title ?? 'Tree House event').trim();
+    const date = String(event.date ?? '').trim();
+    const time = String(event.time ?? '').trim();
+    const dateLine = [date, time].filter(Boolean).join(' · ') || 'Details coming soon';
+    addText(card, 'time', '', dateLine);
+    addText(card, 'h3', '', title);
+    const description = String(event.description ?? event.details ?? '').trim();
+    if (description) addText(card, 'p', '', description);
+    return card;
+  }
 
-        <a class="event-card" href="concerts.html">
-          <div class="event-photo"><img class="concert-img" src="assets/concert.jpg" alt="A band playing live on the Tree House stage" loading="lazy"></div>
-          <div class="event-label">Live & local</div>
-          <h3>Concert Nights</h3>
-          <p>Live band performances and open stages in a welcoming room.</p>
-          <span class="card-link">Concert details &amp; sign-ups <span>↗</span></span>
-        </a>
+  function renderEvents(data) {
+    eventCache = Array.isArray(data) ? data.filter(item => item && typeof item === 'object') : [];
+    document.querySelectorAll('[data-events-list]').forEach(container => {
+      const filter = container.dataset.eventsList || 'all';
+      const matcher = categoryMatches[filter];
+      const items = matcher ? eventCache.filter(event => matcher.test(`${event.name ?? ''} ${event.description ?? ''} ${event.type ?? ''}`)) : eventCache;
+      container.replaceChildren();
+      if (!items.length) {
+        const status = document.createElement('p');
+        status.className = 'feed-status';
+        status.textContent = filter === 'all'
+          ? 'No upcoming events are listed right now. Follow Instagram for announcements.'
+          : `No upcoming ${filter} events are listed yet. Check Instagram for updates.`;
+        container.appendChild(status);
+      } else {
+        items.forEach(event => container.appendChild(formatEvent(event, filter)));
+      }
+    });
+  }
 
-        <a class="event-card" href="service.html">
-          <div class="event-photo"><img class="service-img" src="assets/community-outdoors.jpg" alt="A Tree House group gathering outdoors around a fire pit" loading="lazy"></div>
-          <div class="event-label">Every Saturday</div>
-          <h3>Service Day</h3>
-          <p>Community projects, neighborhood cleanups, and ways to pitch in.</p>
-          <span class="card-link">Service details <span>↗</span></span>
-        </a>
+  function showFeedError() {
+    document.querySelectorAll('[data-events-list]').forEach(container => {
+      if (eventCache.length) return;
+      const status = document.createElement('p');
+      status.className = 'feed-status';
+      status.textContent = 'The event calendar could not load. Please try again or check Instagram for current details.';
+      container.replaceChildren(status);
+    });
+  }
 
-        <a class="event-card" href="game-nights.html">
-          <div class="event-photo"><img class="game-img" src="assets/game-night.jpg" alt="Friends gathered around a table for a game night" loading="lazy"></div>
-          <div class="event-label">Every Sunday</div>
-          <h3>Game Night</h3>
-          <p>Board games, card games, and multiplayer console setups.</p>
-          <span class="card-link">Game night details <span>↗</span></span>
-        </a>
-      </div>
-    </section>
+  let loadingFeed = false;
+  async function refreshEvents() {
+    if (loadingFeed || !document.querySelector('[data-events-list]')) return;
+    loadingFeed = true;
+    try {
+      const response = await fetch(`${EVENT_FEED}?_=${Date.now()}`, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`Calendar returned ${response.status}`);
+      const data = await response.json();
+      renderEvents(data);
+    } catch (error) {
+      console.error('Could not load Tree House event calendar:', error);
+      showFeedError();
+    } finally {
+      loadingFeed = false;
+    }
+  }
 
-    <section class="section wrap" id="schedule" style="padding-top:0">
-      <div class="subpage-section" aria-labelledby="live-event-title">
-        <div class="event-label">Live from the events calendar</div>
-        <h2 id="live-event-title">What’s coming up</h2>
-        <p>New events appear here automatically.</p>
-        <div class="live-events" data-events-list="all" aria-live="polite"><p class="feed-status">Loading upcoming events…</p></div>
-        <div class="feed-refresh"><span>See Instagram for more updates.</span><button type="button" data-refresh-events>Refresh events</button></div>
-        <a class="card-link" href="events.html">See all events &amp; event categories <span>↗</span></a>
-      </div>
-      <div class="updates">
-        <div>
-          <div class="event-label">Upcoming dates & updates</div>
-          <h3>Keep up with what’s next.</h3>
-          <p>Event dates, details, and last-minute updates are posted on Instagram.</p>
-        </div>
-        <a class="button" href="https://www.instagram.com/TheTreeHouseAtProvo/" target="_blank" rel="noopener noreferrer">Follow Tree House ↗</a>
-      </div>
-    </section>
+  document.querySelectorAll('[data-refresh-events]').forEach(button => button.addEventListener('click', refreshEvents));
+  refreshEvents();
+  window.setInterval(refreshEvents, REFRESH_MS);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') refreshEvents();
+  });
 
-    <section class="perform" id="perform">
-      <div class="perform-inner wrap">
-        <div>
-          <div class="kicker">Take the stage</div>
-          <h2>Do your<br><span>thing.</span></h2>
-        </div>
-        <div class="perform-copy">
-          <p>Want to perform, host an event, or bring your business to Tree House? There are lots of ways to join in. First-time performers are welcome—choose any form that fits what you have in mind.</p>
-        </div>
-        <div class="perform-forms">
-          <button class="stage-cta" type="button" data-open-form="band">Band sign-up</button>
-          <button class="stage-cta" type="button" data-open-form="host">Host an event</button>
-          <button class="stage-cta" type="button" data-open-form="openmic">Open stage sign-up</button>
-          <button class="stage-cta" type="button" data-open-form="vendor">Vendor sign-up</button>
-        </div>
-      </div>
-      <div class="form-modal-overlay perform-form-modal" id="formModal" role="dialog" aria-modal="true" aria-labelledby="form-title">
-        <div class="form-modal-container">
-          <div class="form-modal-header">
-            <h2 id="form-title" data-form-title>Sign-up form</h2>
-            <button class="close-modal-btn" type="button" data-close-form aria-label="Close sign-up form">×</button>
-          </div>
-          <div class="form-iframe-container">
-            <iframe id="iframe-band" title="Band sign-up form" data-title="Band sign-up" src="https://docs.google.com/forms/d/e/1FAIpQLSdssuqZgjSETVhLYLQyCj33wBBLv0jfe3eVmEmHhtOBNrLSqw/viewform?embedded=true" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-            <iframe id="iframe-host" title="Host an event form" data-title="Host an event" src="https://docs.google.com/forms/d/e/1FAIpQLSfW4b8CzyzOOWXrw3tED2WNipr7mce6cNPvofWVCyL5RNGidA/viewform?embedded=true" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-            <iframe id="iframe-openmic" title="Open stage sign-up form" data-title="Open stage sign-up" src="https://docs.google.com/forms/d/e/1FAIpQLSdjAoS9IpgHwi3PbAaOkYsmTGjLXxiPIutP_e9neKQ8Vx2WVg/viewform?embedded=true" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-            <iframe id="iframe-vendor" title="Vendor sign-up form" data-title="Vendor sign-up" src="https://docs.google.com/forms/d/e/1FAIpQLSezPPUbTjZ8_chcZ6g0LTc6iu7iOo2gN13XMuOKz7Bdz9aHBQ/viewform?embedded=true" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-          </div>
-        </div>
-      </div>
-    </section>
+  // Embedded Google Form dialog.
+  const modal = document.querySelector('#formModal');
+  const types = ['band', 'host', 'openmic', 'vendor'];
 
-    <section class="section gallery wrap" id="gallery">
-      <div class="section-head">
-        <div>
-          <div class="kicker">A few recent nights</div>
-          <h2>Good people, good memories.</h2>
-        </div>
-        <a class="card-link" href="photos.html">View all photos <span>↗</span></a>
-      </div>
-      <div class="gallery-grid">
-        <div class="gallery-item"><img src="assets/gallery-stage.jpg" alt="The room fills up for a Tree House music night" loading="lazy"><span class="gallery-caption">When the music starts</span></div>
-        <div class="gallery-item"><img src="assets/gallery-game-night.jpg" alt="Friends settling in for a casual night together" loading="lazy"><span class="gallery-caption">Room for one more</span></div>
-        <div class="gallery-item"><img src="assets/gallery-outing.jpg" alt="Tree House friends on an outdoor group outing" loading="lazy"><span class="gallery-caption">Out of the house</span></div>
-      </div>
-    </section>
+  function switchForm(type) {
+    const selected = types.includes(type) ? type : 'band';
+    types.forEach(name => {
+      const frame = document.querySelector(`#iframe-${name}`);
+      const tab = document.querySelector(`[data-form-tab="${name}"]`);
+      if (frame) frame.classList.toggle('active', name === selected);
+      if (tab) {
+        tab.classList.toggle('active', name === selected);
+        tab.setAttribute('aria-selected', String(name === selected));
+      }
+    });
+  }
 
-    <section class="about wrap" id="about">
-      <div>
-        <div class="kicker">A little about us</div>
-        <h2>Made for<br>community.</h2>
-      </div>
-      <div class="about-copy">
-        <p>Tree House is a Provo hangout for people who want to spend time together—whether that means catching a live set, joining a game, meeting new people, or helping out on a service project.</p>
-        <p>Show up as you are. Bring a friend, or come meet someone new.</p>
-      </div>
-    </section>
+  function closeForm() {
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    if (lastActiveElement) lastActiveElement.focus();
+  }
 
-    <section class="instagram wrap">
-      <div>
-        <h3>See what’s happening at Tree House.</h3>
-        <p>Event announcements, photos, and updates from the community.</p>
-      </div>
-      <a class="button outline" href="https://www.instagram.com/TheTreeHouseAtProvo/" target="_blank" rel="noopener noreferrer">@TheTreeHouseAtProvo ↗</a>
-    </section>
-  </main>
+  function openForm(type, trigger) {
+    if (!modal) return;
+    lastActiveElement = trigger || document.activeElement;
+    switchForm(type);
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    modal.querySelector('[data-close-form]')?.focus();
+  }
 
-  <footer>
-    <div class="footer-inner wrap">
-      <a class="brand" href="#top" aria-label="Tree House home"><img src="assets/treehouse-logo.svg" alt="Tree House"></a>
-      <div class="footer-links">
-        <a href="events.html">Events</a><a href="concerts.html#performers">Get on Stage</a><a href="photos.html">Photos</a><a href="about.html">About</a><a href="temple-trips.html">Temple trips</a><a href="volunteer.html">Volunteer</a><a href="suggestions.html">Suggestions</a>
-      </div>
-      <span>Provo, Utah</span>
-    </div>
-  </footer>
+  document.querySelectorAll('[data-open-form]').forEach(button => button.addEventListener('click', () => openForm(button.dataset.openForm, button)));
+  document.querySelectorAll('[data-form-tab]').forEach(button => button.addEventListener('click', () => switchForm(button.dataset.formTab)));
+  modal?.querySelector('[data-close-form]')?.addEventListener('click', closeForm);
+  modal?.addEventListener('click', event => { if (event.target === modal) closeForm(); });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && modal?.classList.contains('open')) closeForm();
+  });
 
-  <script src="site.js" defer></script>
-</body>
-</html>
+  // The suggestion handoff makes clear that the visitor must send the DM themselves.
+  const suggestionForm = document.querySelector('#suggestion-form');
+  if (suggestionForm) {
+    suggestionForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      const fields = new FormData(suggestionForm);
+      const name = String(fields.get('name') || '').trim();
+      const topic = String(fields.get('topic') || 'Suggestion').trim();
+      const message = String(fields.get('message') || '').trim();
+      const payload = `Tree House suggestion — ${topic}\n${name ? `From: ${name}\n` : ''}\n${message}`;
+      const output = document.querySelector('#suggestion-output');
+      const status = document.querySelector('#suggestion-status');
+      output.textContent = payload;
+      output.classList.add('show');
+      window.open('https://www.instagram.com/TheTreeHouseAtProvo/', '_blank', 'noopener,noreferrer');
+      try {
+        await navigator.clipboard.writeText(payload);
+        status.textContent = 'Your message is copied. Instagram will open in a new tab—paste it into a DM and send it to Tree House.';
+      } catch {
+        status.textContent = 'Your message is ready below. Select and copy it, then paste it into an Instagram DM to Tree House.';
+      }
+      output.focus();
+    });
+  }
+})();
